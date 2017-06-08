@@ -9,12 +9,11 @@ namespace Payroll.Test
     [TestClass]
     public class PayrollTest
     {
-        private readonly IEmployeeFactory employeeFactory = new EmployeeFactory();
-        private readonly ISalaryAccount salaryAccount = new SalaryAccount(new ILocation[] {
+        private readonly IEmployeeFactory employeeFactory = new EmployeeFactory(new ILocation[] {
             new Italy(),
             new Germany(),
-            new Ireland()
-        });
+            new Ireland() });
+        private readonly ISalaryAccount salaryAccount = new SalaryAccount();
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Hourly rate is not positive.")]

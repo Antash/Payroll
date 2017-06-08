@@ -9,12 +9,13 @@ namespace Payroll
     {
         static void Main(string[] args)
         {
-            IEmployeeCreator creator = new EmployeeCreator(new EmployeeFactory());
-            ISalaryAccount salaryAccount = new SalaryAccount(new ILocation[] {
+            IEmployeeFactory employeeFactory = new EmployeeFactory(new ILocation[] {
                 new Italy(),
                 new Germany(),
                 new Ireland()
             });
+            IEmployeeCreator creator = new EmployeeCreator(employeeFactory);
+            ISalaryAccount salaryAccount = new SalaryAccount();
             ISalaryDetailsPrinter printer = new SalaryDetailsPrinter(salaryAccount);
 
             var employee = creator.GetEmployee();

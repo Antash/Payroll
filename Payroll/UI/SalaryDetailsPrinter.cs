@@ -16,7 +16,7 @@ namespace Payroll.UI
         public void PrintSalaryDetails(IEmployee employee)
         {
             Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine($"Employee location: {employee.LocationName}\n");
+            Console.WriteLine($"Employee location: {employee.Location.Name}\n");
             Console.WriteLine($"Gross Amount: €{salaryAccount.GetSalaryGross(employee)}\n");
             Console.WriteLine("Less deductions\n");
 

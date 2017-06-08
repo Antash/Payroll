@@ -4,9 +4,9 @@ namespace Payroll
 {
     public class Employee : IEmployee
     {
-        public Employee(string locationName, uint hoursWorked, decimal hourlyRate)
+        public Employee(ILocation location, uint hoursWorked, decimal hourlyRate)
         {
-            LocationName = locationName;
+            Location = location;
             HourlyRate = hourlyRate;
             HoursWorked = hoursWorked;
         }
@@ -21,7 +21,7 @@ namespace Payroll
             get; protected set;
         }
 
-        public string LocationName
+        public ILocation Location
         {
             get; protected set;
         }
