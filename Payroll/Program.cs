@@ -6,7 +6,7 @@ namespace Payroll
     {
         static void Main(string[] args)
         {
-            IEmployeeCreator creator = new EmployeeCreator();
+            IEmployeeCreator creator = new EmployeeCreator(new EmployeeFactory());
 
             var employee = creator.GetEmployee();
         }

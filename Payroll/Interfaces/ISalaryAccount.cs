@@ -2,6 +2,7 @@
 {
     public interface ISalaryAccount
     {
-        decimal GetGrossSalary(IEmployee employee);
+        decimal GetSalaryGross(IEmployee employee);
+        decimal GetSalaryNet(IEmployee employee);
     }
 }

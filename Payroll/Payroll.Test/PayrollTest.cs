@@ -10,19 +10,39 @@ namespace Payroll.Test
     public class PayrollTest
     {
         private readonly IEmployeeFactory employeeFactory = new EmployeeFactory();
-        private readonly ISalaryAccount salaryAccount = new SalaryAccount();
+        private readonly ISalaryAccount salaryAccount = new SalaryAccount(new ILocation[] {
+            new Italy(),
+            new Germany(),
+            new Ireland()
+        });
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Hourly rate is not positive.")]
         public void TestSalaryGross()
         {
             var employee1 = employeeFactory.CreateEmployee("Ireland", 40, 10);
-            Assert.AreEqual(400, salaryAccount.GetGrossSalary(employee1));
+            Assert.AreEqual(400, salaryAccount.GetSalaryGross(employee1));
 
             var employee2 = employeeFactory.CreateEmployee("Ireland", 35, 20.4m);
-            Assert.AreEqual(714, salaryAccount.GetGrossSalary(employee2));
+            Assert.AreEqual(714, salaryAccount.GetSalaryGross(employee2));
 
             var employee3 = employeeFactory.CreateEmployee("Ireland", 10, 0);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Location is not valid.")]
+        public void TestSalaryNet()
+        {
+            var employee1 = employeeFactory.CreateEmployee("Ireland", 40, 10);
+            Assert.AreEqual(400 - 400 * 0.25m - 400 * 0.07m - 400 * 0.04m, 
+                salaryAccount.GetSalaryNet(employee1));
+
+            var employee2 = employeeFactory.CreateEmployee("Ireland", 40, 20);
+            Assert.AreEqual(800 - 600 * 0.25m - 200 * 0.4m - 500 * 0.07m - 300 * 0.08m - 800 * 0.04m, 
+                salaryAccount.GetSalaryNet(employee2));
+
+            var employee = employeeFactory.CreateEmployee("Island", 40, 10);
+            salaryAccount.GetSalaryNet(employee);
         }
 
         [TestMethod]

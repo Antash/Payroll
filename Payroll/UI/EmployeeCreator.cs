@@ -5,7 +5,12 @@ namespace Payroll.UI
 {
     public class EmployeeCreator : IEmployeeCreator
     {
-        IEmployeeFactory employeeFactory = new EmployeeFactory();
+        private IEmployeeFactory employeeFactory;
+
+        public EmployeeCreator(IEmployeeFactory employeeFactory)
+        {
+            this.employeeFactory = employeeFactory;
+        }
 
         public IEmployee GetEmployee()
         {
