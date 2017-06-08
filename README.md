@@ -1,3 +1,9 @@
+# Developer comments
+
+- I assume that every deduction is based on gross salary,
+- This task take a bit longer than 3 hours. Hope it is not too bad,
+- I really enjoyed it, thank you for the opportunity!
+
 # Instructions
 
 - You have 3 hours to finish the tech test.
