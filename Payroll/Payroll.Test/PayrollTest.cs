@@ -29,6 +29,7 @@ namespace Payroll.Test
         public void TestDeductionsIreland()
         {
             var ireland = new Ireland();
+            Assert.AreEqual("Ireland", ireland.Name);
             Assert.AreEqual(3, ireland.Deductions.Count());
 
             var incomeTax = ireland.Deductions.SingleOrDefault(d => d.Description == "Income Tax");
@@ -45,6 +46,26 @@ namespace Payroll.Test
             Assert.IsNotNull(pension);
             Assert.AreEqual(16, pension.Calculate(400));
             Assert.AreEqual(20, pension.Calculate(500));
+        }
+
+        [TestMethod]
+        public void TestDeductionsItaly()
+        {
+            var italy = new Italy();
+            Assert.AreEqual("Italy", italy.Name);
+            Assert.AreEqual(2, italy.Deductions.Count());
+
+            var incomeTax = italy.Deductions.SingleOrDefault(d => d.Description == "Income Tax");
+            Assert.IsNotNull(incomeTax);
+            Assert.AreEqual(125, incomeTax.Calculate(500));
+            Assert.AreEqual(175, incomeTax.Calculate(700));
+
+            var inps = italy.Deductions.SingleOrDefault(d => d.Description == "INPS");
+            Assert.IsNotNull(inps);
+            Assert.AreEqual(36, inps.Calculate(400));
+            Assert.AreEqual(64.4m, inps.Calculate(700));
+            Assert.AreEqual(95, inps.Calculate(1000));
+            Assert.AreEqual(99.75m, inps.Calculate(1050));
         }
     }
 }

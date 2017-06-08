@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using Payroll.Interfaces;
+﻿using Payroll.Interfaces;
+using System.Collections.Generic;
 
 namespace Payroll.Locations
 {
