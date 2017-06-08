@@ -2,7 +2,7 @@
 {
     public interface IEmployee
     {
-        string Location { get; }
+        string LocationName { get; }
         uint HoursWorked { get; }
         decimal HourlyRate { get; }
     }

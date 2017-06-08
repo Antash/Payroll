@@ -1,4 +1,5 @@
 ﻿using Payroll.Interfaces;
+using System;
 
 namespace Payroll
 {
@@ -6,6 +7,10 @@ namespace Payroll
     {
         public IEmployee CreateEmployee(string location, uint hoursWorked, decimal hourlyRate)
         {
+            if (hourlyRate <= 0)
+            {
+                throw new ArgumentException("Employee hourly rate should be positive.");
+            }
             return new Employee(location, hoursWorked, hourlyRate);
         }
     }

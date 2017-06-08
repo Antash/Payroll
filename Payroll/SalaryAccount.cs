@@ -1,5 +1,4 @@
 ﻿using Payroll.Interfaces;
-using System;
 
 namespace Payroll
 {
