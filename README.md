@@ -2,6 +2,7 @@
 
 - I assume that every deduction is based on gross salary,
 - This task take a bit longer than 3 hours. Hope it is not too bad,
+- Code coverage is not 100%, I decided to stop wrighting tests and focused on features when feel run out of time,
 - I really enjoyed it, thank you for the opportunity!
 
 # Instructions
