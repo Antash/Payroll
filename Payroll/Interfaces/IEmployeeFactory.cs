@@ -2,6 +2,6 @@
 {
     public interface IEmployeeFactory
     {
-        IEmployee CreateEmployee(string locationName, uint workedHours, decimal hourlyRate);
+        IEmployee CreateEmployee(string locationName, uint hoursWorked, decimal hourlyRate);
     }
 }
