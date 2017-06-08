@@ -3,3 +3,7 @@
 ################################################################################
 
 *.suo
+/Payroll/bin/Debug
+/Payroll/obj/Debug
+/Payroll/Payroll.Test/bin/Debug
+/Payroll/Payroll.Test/obj/Debug
