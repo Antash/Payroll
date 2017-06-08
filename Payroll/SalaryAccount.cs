@@ -14,6 +14,17 @@ namespace Payroll
             locationList.AddRange(locations);
         }
 
+        public IEnumerable<DeductionCharge> GetDeductionsCharged(IEmployee employee)
+        {
+            var employeeLocation = locationList.SingleOrDefault(l => l.Name == employee.LocationName);
+            if (employeeLocation == null)
+            {
+                throw new ArgumentException("Employee location is not valid.");
+            }
+            var gross = GetSalaryGross(employee);
+            return employeeLocation.Deductions.Select(d => new DeductionCharge(d.Description, d.Calculate(gross)));
+        }
+
         public decimal GetSalaryGross(IEmployee employee)
         {
             return employee.HourlyRate * employee.HoursWorked;
@@ -27,7 +38,7 @@ namespace Payroll
                 throw new ArgumentException("Employee location is not valid.");
             }
             var gross = GetSalaryGross(employee);
-            return gross - employeeLocation.Deductions.Sum(d => d.Calculate(gross));
+            return gross - GetDeductionsCharged(employee).Sum(d => d.Amount);
         }
     }
 }
