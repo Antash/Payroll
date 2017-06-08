@@ -67,5 +67,23 @@ namespace Payroll.Test
             Assert.AreEqual(95, inps.Calculate(1000));
             Assert.AreEqual(99.75m, inps.Calculate(1050));
         }
+
+        [TestMethod]
+        public void TestDeductionsGermany()
+        {
+            var germany = new Germany();
+            Assert.AreEqual("Germany", germany.Name);
+            Assert.AreEqual(2, germany.Deductions.Count());
+
+            var incomeTax = germany.Deductions.SingleOrDefault(d => d.Description == "Income Tax");
+            Assert.IsNotNull(incomeTax);
+            Assert.AreEqual(100, incomeTax.Calculate(400));
+            Assert.AreEqual(196, incomeTax.Calculate(700));
+
+            var pension = germany.Deductions.SingleOrDefault(d => d.Description == "Pension");
+            Assert.IsNotNull(pension);
+            Assert.AreEqual(8, pension.Calculate(400));
+            Assert.AreEqual(14, pension.Calculate(700));
+        }
     }
 }
