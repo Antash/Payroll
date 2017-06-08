@@ -32,13 +32,7 @@ namespace Payroll
 
         public decimal GetSalaryNet(IEmployee employee)
         {
-            var employeeLocation = locationList.SingleOrDefault(l => l.Name == employee.LocationName);
-            if (employeeLocation == null)
-            {
-                throw new ArgumentException("Employee location is not valid.");
-            }
-            var gross = GetSalaryGross(employee);
-            return gross - GetDeductionsCharged(employee).Sum(d => d.Amount);
+            return GetSalaryGross(employee) - GetDeductionsCharged(employee).Sum(d => d.Amount);
         }
     }
 }
