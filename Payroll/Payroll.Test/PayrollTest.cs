@@ -2,6 +2,7 @@
 using Payroll.Interfaces;
 using Payroll.Locations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Payroll.Test
@@ -9,11 +10,19 @@ namespace Payroll.Test
     [TestClass]
     public class PayrollTest
     {
-        private readonly IEmployeeFactory employeeFactory = new EmployeeFactory(new ILocation[] {
-            new Italy(),
-            new Germany(),
-            new Ireland() });
+        private readonly EmployeeFactory employeeFactory = new EmployeeFactory();
         private readonly ISalaryAccount salaryAccount = new SalaryAccount();
+
+        [TestInitialize]
+        public void Init()
+        {
+            employeeFactory.LocationList = new List<ILocation>(
+                new ILocation[] {
+                    new Italy(),
+                    new Germany(),
+                    new Ireland()
+                });
+        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException), "Hourly rate is not positive.")]

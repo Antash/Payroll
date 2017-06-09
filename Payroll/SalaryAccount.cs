@@ -1,10 +1,11 @@
 ﻿using Payroll.Interfaces;
 using System.Collections.Generic;
-using System;
 using System.Linq;
+using System.ComponentModel.Composition;
 
 namespace Payroll
 {
+    [Export(typeof(ISalaryAccount))]
     public class SalaryAccount : ISalaryAccount
     {
         public IEnumerable<DeductionCharge> GetDeductionsCharged(IEmployee employee)

@@ -1,23 +1,21 @@
 ﻿using Payroll.Interfaces;
 using System;
+using System.ComponentModel.Composition;
 
 namespace Payroll.UI
 {
+    [Export(typeof(IEmployeeCreator))]
     public class EmployeeCreator : IEmployeeCreator
     {
-        private IEmployeeFactory employeeFactory;
-
-        public EmployeeCreator(IEmployeeFactory employeeFactory)
-        {
-            this.employeeFactory = employeeFactory;
-        }
+        [Import(typeof(IEmployeeFactory))]
+        internal IEmployeeFactory EmployeeFactory { get; set; }
 
         public IEmployee GetEmployee()
         {
             var hoursWorked = PromptHoursWorked();
             var hourlyRate = PromptHourlyRate();
             var location = PromptLocation();
-            return employeeFactory.CreateEmployee(location, hoursWorked, hourlyRate);
+            return EmployeeFactory.CreateEmployee(location, hoursWorked, hourlyRate);
         }
 
         private string PromptLocation()

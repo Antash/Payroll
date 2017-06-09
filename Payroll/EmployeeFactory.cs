@@ -1,18 +1,16 @@
 ﻿using Payroll.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 
 namespace Payroll
 {
+    [Export(typeof(IEmployeeFactory))]
     public class EmployeeFactory : IEmployeeFactory
     {
-        private List<ILocation> locationList = new List<ILocation>();
-
-        public EmployeeFactory(IEnumerable<ILocation> locations)
-        {
-            locationList.AddRange(locations);
-        }
+        [ImportMany(typeof(ILocation))]
+        internal List<ILocation> LocationList { get; set; }
 
         public IEmployee CreateEmployee(string locationName, uint hoursWorked, decimal hourlyRate)
         {
@@ -20,7 +18,7 @@ namespace Payroll
             {
                 throw new ArgumentException("Employee hourly rate should be positive.");
             }
-            var location = locationList.SingleOrDefault(l => l.Name == locationName);
+            var location = LocationList.SingleOrDefault(l => l.Name == locationName);
             if (location == null)
             {
                 throw new ArgumentException("Employee location is not valid.");

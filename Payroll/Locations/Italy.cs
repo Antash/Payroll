@@ -1,8 +1,10 @@
 ﻿using Payroll.Interfaces;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 
 namespace Payroll.Locations
 {
+    [Export(typeof(ILocation))]
     public class Italy : ILocation
     {
         private static readonly IList<IDeduction> deductions = new List<IDeduction>();
